@@ -139,7 +139,6 @@ export const updateUser = async (req: Request, res: Response) => {
             Comments: { rich_text: [{ text: { content: comments } }] },
         }
     });
-    // await notion.patch(`/pages/${id}`, {
     res.json({ message: 'User updated' }); 
 };
 
