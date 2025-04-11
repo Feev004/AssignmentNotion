@@ -36,6 +36,7 @@ export const getUsers = async (_req: Request, res: Response) => {
     res.json(users);
 };
 
+
 // Create User
 export const createUser = async (req: Request, res: Response) => {
     // const { name, email, role } = req.body;
