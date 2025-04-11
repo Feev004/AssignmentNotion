@@ -22,18 +22,23 @@ async function loadUsers() {
 
     users.forEach((user, index) => {
       userTable.innerHTML += `
-                <tr>
-                    <td>${index + 1}</td>
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>${user.age}</td>
-                    <td>${user.role}</td>
-                    <td>${user.recommend}</td>
-                    <td>${user.feature}</td>
-                    <td>${user.comments}</td>
-                </tr>
-            `;
+        <tr>
+          <td>${index + 1}</td>
+          <td>${user.name}</td>
+          <td>${user.email}</td>
+          <td>${user.age}</td>
+          <td>${user.role}</td>
+          <td>${user.recommend}</td>
+          <td>${user.feature}</td>
+          <td>${user.comments}</td>
+          <td>
+            <button onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}')">Edit</button>
+            <button onclick="deleteUser('${user.id}')">Delete</button>
+          </td>
+        </tr>
+      `;
     });
+    
   } catch (error) {
     console.error("Axios error:", error);
   }
@@ -100,7 +105,7 @@ function editUser(id, name, email, age, role, recommend, feature, comments) {
 }
 
 // Delete user
-async function deleteAPI() {
+async function deleteAPI(id) {
   try {
     await axios.delete(`${apiUrl}/${id}`);
     loadUsers();
@@ -109,7 +114,7 @@ async function deleteAPI() {
   }
 }
 
-async function deleteUser(id) {
+function deleteUser(id) {
   Swal.fire({
     title: "Are you sure?",
     text: "Delete this user?",
@@ -120,7 +125,7 @@ async function deleteUser(id) {
     confirmButtonText: "Yes, delete it!",
   }).then((result) => {
     if (result.isConfirmed) {
-      deleteAPI();
+      deleteAPI(id); // <-- เพิ่ม id ตรงนี้
       Swal.fire({
         title: "Deleted!",
         text: "Your file has been deleted.",
@@ -129,6 +134,7 @@ async function deleteUser(id) {
     }
   });
 }
+
 
 // Initial load
 loadUsers();
