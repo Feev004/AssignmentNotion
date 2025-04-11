@@ -1,3 +1,28 @@
 body {
     background-color: #f8f9fa;
 }
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    /* text-align: center; */
+    gap: 10px; 
+    flex: 1;
+}
+
+.form-container {
+    display: flex;
+    flex-wrap: nowrap; /* จะบังคับให้อยู่บรรทัดเดียว */
+    gap: 10px; /* ระยะห่างระหว่างช่อง */
+    align-items: center; /* จัดให้อยู่ตรงกลางแนวดิ่ง */
+  }
+  
+  .form-container input {
+    flex: 1; /* ช่องกรอกข้อมูลจะขยายตามพื้นที่ว่าง */
+    min-width: 150px; /* ป้องกันช่องเล็กเกินไป */
+  }
+  
+  .form-container button {
+    padding: 10px 20px;
+  }
