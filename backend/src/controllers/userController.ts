@@ -20,10 +20,6 @@ export const getUsers = async (_req: Request, res: Response) => {
     console.log(data);
 
     const users = data.results.map((user: any) => ({
-        // id: user.id,
-        // name: user.properties.Name.title[0]?.plain_text,
-        // email: user.properties.Email.email,
-        // role: user.properties.Role.rich_text[0]?.plain_text,
         id: user.id,
         name: user.properties.Name.title[0]?.text.content,
         email: user.properties.Email.email,
