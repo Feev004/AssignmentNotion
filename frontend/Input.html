@@ -18,11 +18,15 @@
       <div class="text-bg-dark collapse" id="navbarHeader" style>
         <div class="containe">
           <div class="row">
-            <div class="col-sm-4 offset-md-1 py-4 ">
+            <div class="menu-right text-end pe-5">
               <h4>Menu</h4>
               <ul class="list-unstyled">
-                <li><a href="Input.html" class="btn btn-dark effect">Input</a></li>
-                <li><a href="Edit.html" class="btn btn-dark effect">Edit</a></li>
+                <li>
+                  <a href="Input.html" class="btn btn-dark effect">Input</a>
+                </li>
+                <li>
+                  <a href="Edit.html" class="btn btn-dark effect">Edit</a>
+                </li>
                 <li>
                   <a href="Delete.html" class="btn btn-dark effect">Delete</a>
                 </li>
@@ -52,59 +56,112 @@
     </header>
     <div class="container mt-5">
       <div class="card shadow-lg p-4">
-          <h2 class="mb-4 text-center">User Form</h2>
-          <form id="userForm" class="row g-3">
+        <h2 class="mb-4 text-center">User Form</h2>
+        <form
+          id="userForm"
+          class="row g-3"
+          action="https://hotel-feedback.freecodecamp.org"
+        >
+          <fieldset>
+            <label for="full-name">Name</label>
             <input type="hidden" id="userId" />
-    
             <div class="form-group">
-              <input type="text" id="name" class="form-control" placeholder="Name" required />
+              <input
+                type="text"
+                id="name"
+                class="form-control"
+                placeholder="--"
+                required
+              />
             </div>
-    
+
             <div class="form-group">
-              <input type="email" id="email" class="form-control" placeholder="Email" required />
+              <label for="full-name">Email</label>
+              <input
+                type="email"
+                id="email"
+                class="form-control"
+                placeholder="--"
+                required
+              />
             </div>
-    
+
             <div class="form-group">
-              <input type="number" id="age" class="form-control" placeholder="Age" required />
+              <label for="full-name">Age</label>
+              <input
+                type="number"
+                id="age"
+                class="form-control"
+                placeholder="--"
+                required
+              />
             </div>
-    
+
             <div class="form-group">
-                <select name="free" id="role" class="form-select" placeholder="Role" required>
-                    <option value="student">Student</option>
-                    <option value="full-time-job">Full time job</option>
-                    <option value="full-time-learner">Full time learner</option>
-                    <option value="prefer-not-to-say">Prefer not to say</option>
-                    <option value="other">Other</option>
-                </select>
-              <!-- <input type="text" id="role" class="form-control" placeholder="Role" required /> -->
+              <label for="full-name">Role</label>
+              <select
+                name="free"
+                id="role"
+                class="form-select"
+                placeholder="Role"
+                required
+              >
+                <option value="">--</option>
+                <option value="student">Student</option>
+                <option value="full-time-job">Full time job</option>
+                <option value="full-time-learner">Full time learner</option>
+                <option value="prefer-not-to-say">Prefer not to say</option>
+                <option value="other">Other</option>
+              </select>
             </div>
-    
+
             <div class="form-group">
-              <input type="text" id="recommend" class="form-control" placeholder="Recommend" required />
+              <label for="full-name">Recommend</label>
+
+              <input
+                type="text"
+                id="recommend"
+                class="form-control"
+                placeholder="--"
+                required
+              />
             </div>
-    
+
             <div class="form-group">
-                <!-- <label for="free"></label> -->
-                <select name="free" id="feature" class="form-select" placeholder="Feature" required>
-                    <!-- <option value="select-an-feature">Select an feature</option> -->
-                    <option value="challenges">Challenges</option>
-                    <option value="projects">Projects</option>
-                    <option value="community">Community</option>
-                    <option value="open-source">Open Source</option>
-                </select>
-              <!-- <input type="text" id="feature" class="form-control" placeholder="Feature" required /> -->
+              <label for="full-name">Feature</label>
+              <select
+                name="free"
+                id="feature"
+                class="form-select"
+                placeholder="Feature"
+                required
+              >
+                <option value="">--</option>
+                <option value="challenges">Challenges</option>
+                <option value="projects">Projects</option>
+                <option value="community">Community</option>
+                <option value="open-source">Open Source</option>
+              </select>
             </div>
-    
             <div class="form-group col-md-12">
-              <input type="text" id="comments" class="form-control " placeholder="Comments" required />
+              <label for="full-name">Comments</label>
+              <input
+                type="text"
+                id="comments"
+                class="form-control"
+                placeholder="--"
+                required
+              />
             </div>
-    
-            <div class=" text-end ">
-              <button class="btn btn-primary px-4 effect" type="submit">Save</button>
+            <div class="text-end">
+              <button class="btn btn-primary px-4 effect" type="submit">
+                Save
+              </button>
             </div>
-          </form>
-        </div>
+          </fieldset>
+        </form>
       </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>

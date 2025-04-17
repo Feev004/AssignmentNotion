@@ -136,3 +136,21 @@ h1, h2 {
   font-size: 14px;
   border-radius: 6px;
 }
+
+.menu-right {
+  text-align: right;
+  padding-right: 40px; /* ปรับตรงนี้ */
+  /* margin-right: 620px; */
+  /* margin-left: 620px; */
+}
+
+
+.menu-right ul {
+  list-style: none;
+  padding: 0;
+}
+
+.menu-right li {
+  margin: 10px 0;
+}
+
