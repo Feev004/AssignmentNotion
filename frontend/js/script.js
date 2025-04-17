@@ -31,6 +31,9 @@ async function loadUsers() {
           <td>${user.recommend}</td>
           <td>${user.feature}</td>
           <td>${user.comments}</td>
+          <td>
+            <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
+          </td>
         </tr>
       `;
     });
@@ -39,10 +42,43 @@ async function loadUsers() {
   }
 }
 
+// Delete user
+async function deleteAPI(id) {
+  try {
+    await axios.delete(`${apiUrl}/${id}`, {
+      headers: {
+        "ngrok-skip-browser-warning": "true"
+      }
+    });
+    loadUsers(); // โหลดข้อมูลใหม่หลังลบ
+  } catch (error) {
+    console.error("Delete error:", error);
+  }
+}
+
+async function deleteUser(id) {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Delete this user?",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      deleteAPI(id); // ✅ ส่ง id เข้าไปตรงนี้
+      Swal.fire("Deleted!", "User has been deleted.", "success");
+    }
+  });
+}
+
 // Initial load
 loadUsers();
 
-{/* <td>
+{
+  /* <td>
 <a href="Edit.html?id=${user.id}" class="btn btn-sm btn-warning">Edit</a>
 <a href="Delete.html?id=${user.id}" class="btn btn-sm btn-info">View</a>
-</td> */}
+</td> */
+}
