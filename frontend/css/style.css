@@ -154,3 +154,10 @@ h1, h2 {
   margin: 10px 0;
 }
 
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}

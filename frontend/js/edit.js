@@ -23,10 +23,10 @@ async function loadUsers() {
     users.forEach((user, index) => {
       userTable.innerHTML += `
         <tr>
-          <td>${index + 1}</td>
-          <td>${user.name}</td>
-          <td>${user.email}</td>
-          <td><button class="btn btn-warning btn-sm" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}')">Edit</button>
+          <td class="text-center">${index + 1}</td>
+          <td class="text-left">${user.name}</td>
+          <td class="text-left">${user.email}</td>
+          <td><button class="btn btn-warning btn-sm text-center" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}')">Edit</button>
 </td>
         </tr>
       `;
