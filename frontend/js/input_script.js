@@ -41,9 +41,11 @@ document.getElementById("userForm").onsubmit = async (e) => {
       //alert(error.response?.data?.error || 'Request failed');
     console.log(error.response?.data?.error)
       Swal.fire({
-        title: error.response?.data?.error || "Request failed",
-        icon: "success",
-        draggable: true,
+        title: "เกิดข้อผิดพลาด!",
+        text: error.response?.data?.error || "ไม่สามารถบันทึกข้อมูลได้",
+        icon: "error",
+        confirmButtonColor: "#d33",
+        confirmButtonText: "รับทราบ",
       });
     }
   };
@@ -59,36 +61,5 @@ document.getElementById("userForm").onsubmit = async (e) => {
     document.getElementById("feature").value = feature;
     document.getElementById("comments").value = comments;
   }
-  
-  // Delete user
-  async function deleteAPI(id) {
-    try {
-      await axios.delete(`${apiUrl}/${id}`);
-      loadUsers();
-    } catch (error) {
-      console.error(error);
-    }
-  }
-  
-  function deleteUser(id) {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Delete this user?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        deleteAPI(id); // <-- เพิ่ม id ตรงนี้
-        Swal.fire({
-          title: "Deleted!",
-          text: "Your file has been deleted.",
-          icon: "success",
-        });
-      }
-    });
-  }
-  
+
   
