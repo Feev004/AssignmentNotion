@@ -34,7 +34,6 @@ async function loadUsers() {
         </tr>
       `;
     });
-    
   } catch (error) {
     console.error("Axios error:", error);
   }
@@ -42,3 +41,8 @@ async function loadUsers() {
 
 // Initial load
 loadUsers();
+
+{/* <td>
+<a href="Edit.html?id=${user.id}" class="btn btn-sm btn-warning">Edit</a>
+<a href="Delete.html?id=${user.id}" class="btn btn-sm btn-info">View</a>
+</td> */}

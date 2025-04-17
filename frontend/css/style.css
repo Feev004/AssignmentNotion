@@ -3,15 +3,21 @@ body {
     background-color: #f8f9fa;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-.center {
-  /* display: flex; */
-  /* display: grid; */
-   place-items: center; /*จัดกลางทั้งแนวตั้งและแนวนอน */
+.center, .center2 {
+  display: flex;
   justify-content: center;
   align-items: center;
-  height: 15vh;
   text-align: center;
 }
+
+.center {
+  height: 15vh;
+}
+
+.center2 {
+  height: 60vh;
+}
+
 
 .mycontainer {
   max-width: 400px;
@@ -30,10 +36,15 @@ body {
   flex-wrap: wrap; /* ให้ input ห่อบรรทัดใหม่ถ้าเต็ม */
 }
 
-h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333;
+h1, h2 {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container-input {
@@ -92,4 +103,36 @@ h2 {
 
 .btn-primary:hover {
   background-color: #0056b3;
+}
+
+.edit-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.edit-table th,
+.edit-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.edit-table th {
+  background-color: #007bff;
+  color: white;
+}
+
+.edit-table tr:hover {
+  background-color: #f1f1f1;
+}
+
+.table .btn {
+  padding: 5px 10px;
+  font-size: 14px;
+  border-radius: 6px;
 }
