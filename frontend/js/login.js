@@ -1,36 +1,51 @@
 const apiUrl = "https://desired-monthly-griffon.ngrok-free.app/api/users";
 
-document.getElementById("loginForm").addEventListener("submit", async function (e) {
-  e.preventDefault();
+// ✅ ตรวจว่ามี loginForm ไหม ก่อนจะผูก event
+const loginForm = document.getElementById("loginForm");
 
-  const inputUsername = document.getElementById("username").value;
-  const inputPassword = document.getElementById("password").value;
+if (loginForm) {
+  loginForm.addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-  try {
-    const response = await axios.get(apiUrl, {
-      headers: {
-        "ngrok-skip-browser-warning": "true",
-      },
-    });
+    const inputUsername = document.getElementById("username").value.trim();
+    const inputPassword = document.getElementById("password").value.trim();
 
-    const users = response.data;
+    try {
+      const response = await axios.get(apiUrl, {
+        headers: {
+          "ngrok-skip-browser-warning": "true",
+        },
+      });
 
-    const foundUser = users.find(
-        //เช็ค email แทน username <--
-      user => user.email === inputUsername && user.password === inputPassword
-    );
+      const users = response.data;
 
-    if (foundUser) {
-      Swal.fire("Login Success!", `Welcome, ${foundUser.name}`, "success");
-      window.location.href = "showdata.html"
-      // เปลี่ยนหน้าหลัง login ได้ เช่น:
-      // window.location.href = "dashboard.html";
-    } else {
-      Swal.fire("Login Failed", "Invalid username or password", "error");
+      const foundUser = users.find(
+        (user) => user.email === inputUsername && user.password === inputPassword
+      );
+
+      console.log("Found user:", foundUser);
+
+      if (foundUser) {
+        const role = foundUser.permmission/*?.toLowerCase()*/;
+
+        Swal.fire("Login Success!", `Welcome, ${foundUser.name} ${foundUser.permmission}`, "success").then(() => {
+          if (role === "user") {
+            window.location.href = "userShowData.html";
+          } else if (role === "admin") {
+            window.location.href = "showdata.html";
+          } else {
+            Swal.fire("Login Failed", `Unrecognized role: "${foundUser.permmission}"`, "error");
+          }
+        });
+      } else {
+        Swal.fire("Login Failed", "Invalid username or password", "error");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      Swal.fire("Error", "Something went wrong", "error");
     }
+  });
+}
 
-  } catch (error) {
-    console.error("Login error:", error);
-    Swal.fire("Error", "Something went wrong", "error");
-  }
-});
+// Initial load
+loadUsers();

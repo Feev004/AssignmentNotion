@@ -29,6 +29,7 @@ export const getUsers = async (_req: Request, res: Response) => {
         recommend: user.properties.Recommend.rich_text[0]?.text.content,
         feature: user.properties.Feature.rich_text[0]?.text.content,
         comments: user.properties.Comments.rich_text[0]?.text.content,
+        permmission: user.properties.Permmission.rich_text[0]?.text.content,
     }));
     res.json(users);
 };
@@ -36,12 +37,7 @@ export const getUsers = async (_req: Request, res: Response) => {
 
 // Create User
 export const createUser = async (req: Request, res: Response) => {
-    // const { name, email, role } = req.body;
-    const { name, email, password, age, role, recommend, feature, comments, position } = req.body;
-
-    // if (!name || !email || !role) {
-    //     res.status(400).json({ error: "Please provide name, email, and role." });
-    // }
+    const { name, email, password, age, role, recommend, feature, comments, permmission } = req.body;
     if ( !name || !email /*|| !password*/ || !age || !role || !recommend || !feature || !comments) {
         res.status(400).json({ error: "Please provide name, email, role, age, recommend, feature, and comments." });
     }else {
@@ -72,7 +68,7 @@ export const createUser = async (req: Request, res: Response) => {
                         Recommend: { rich_text: [{ text: { content: recommend } }] },
                         Feature: { rich_text: [{ text: { content: feature } }] },
                         Comments: { rich_text: [{ text: { content: comments } }] },
-                        Position: { rich_text: [{ text: { content: "user" } }] }, // เพิ่ม Position เป็น "user"
+                        Permmission: { rich_text: [{ text: { content: "user" } }] }, // เพิ่ม Position เป็น "user"
                     }
                 });
                 res.status(201).json({ message: 'User created' });
@@ -81,53 +77,12 @@ export const createUser = async (req: Request, res: Response) => {
             res.status(500).json({ error });
         }
     }
-    //  else {
-    //     try {
-    //         // 👇 Query Notion for existing email
-    //         const queryResponse = await notion.post(`/databases/${_db_id}/query`, {
-    //             filter: {
-    //                 property: "Email",
-    //                 email: {
-    //                     equals: email,
-    //                 },
-    //             },
-    //         });
-
-    //         if (queryResponse.data.results.length > 0) {
-    //             res.status(400).json({ error: "Email already exists." });
-    //         } else {
-
-    //             // 👇 If no duplicate, proceed with creation
-    //             await notion.post('/pages', {
-    //                 parent: { database_id: _db_id },
-    //                 properties: {
-    //                     Name: { title: [{ text: { content: name } }] },
-    //                     Email: { email: email },
-    //                     Role: { rich_text: [{ text: { content: role } }] },
-    //                 }
-    //             });
-    //             res.status(201).json({ message: 'User created' });
-    //         }
-    //     } catch (error: any) {
-    //         res.status(500).json({ error: error.message });
-    //     }
-    // }
 };
 
 // Update User
 export const updateUser = async (req: Request, res: Response) => {
-    // const { id } = req.params;
-    // const { name, email, role } = req.body;
-    // await notion.patch(`/pages/${id}`, {
-    //     properties: {
-    //         Name: { title: [{ text: { content: name } }] },
-    //         Email: { email: email },
-    //         Role: { rich_text: [{ text: { content: role } }] },
-    //     }
-    // });
-    // res.json({ message: 'User updated' });
     const { id } = req.params; // แยก ID จากพารามิเตอร์คำขอ
-    const { name, email, password, age, role, recommend, feature, comments, position } = req.body;
+    const { name, email, password, age, role, recommend, feature, comments, permmission } = req.body;
     await notion.patch(`/pages/${id}`, {
         properties: {
             Name: { title: [{ text: { content: name } }] },
@@ -143,6 +98,7 @@ export const updateUser = async (req: Request, res: Response) => {
     res.json({ message: 'User updated' }); 
 };
 
+// Login User
 export const loginUser = async (req: Request, res: Response) => {
     const { id } = req.params; // แยก ID จากพารามิเตอร์คำขอ
     // const { name, email, password, age, role, recommend, feature, comments, position } = req.body;
