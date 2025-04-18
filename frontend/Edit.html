@@ -17,10 +17,10 @@
     <header data-bs-theme="dark">
       <div class="navbar-dark bg-dark shadow-sm">
         <div class="container">
-          <a href="index.html" class="navbar-brand d-flex align-items-center">
+          <a href="showdata.html" class="navbar-brand d-flex align-items-center">
             <strong>Database</strong>
           </a>
-          <a href="index.html" class="btn btn-dark effect">Home</a>
+          <a href="showdata.html" class="btn btn-dark effect">Home</a>
           <a href="Input.html" class="btn btn-dark effect">Input</a>
           <a href="Edit.html" class="btn btn-dark effect">Edit</a>
           <!-- <a href="Delete.html" class="btn btn-dark effect">Delete</a> -->
@@ -57,6 +57,11 @@
                 placeholder="--Name@gmail.com--"
                 required
               />
+            </div>
+
+            <div class="form-group">
+              <label for="form-Password">Password</label>
+              <input type="password" id="password" class="form-control" placeholder="--" required />
             </div>
 
             <div class="form-group">
@@ -127,9 +132,8 @@
               />
             </div>
             <div class="text-end">
-              <button class="btn btn-primary px-4 effect" type="submit">
-                Save
-              </button>
+              <a href="showdata.html" class="btn btn-primary px-4 effect" type="submit">Save</a>
+              <!-- <button class="btn btn-primary px-4 effect" type="submit">Save</button> -->
             </div>
           </fieldset>
         </form>

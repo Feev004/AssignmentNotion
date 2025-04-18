@@ -9,13 +9,14 @@ document.getElementById("userForm").onsubmit = async (e) => {
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const age = document.getElementById("age").value.trim();
+  // const password = document.getElementById("password").value.trim();
   const role = document.getElementById("role").value.trim();
   const recommend = document.getElementById("recommend").value.trim();
   const feature = document.getElementById("feature").value.trim();
   const comments = document.getElementById("comments").value.trim();
 
   // เช็กว่ามีฟิลด์ไหนว่างบ้าง
-  if (!name || !email || !age || !role || !recommend || !feature || !comments) {
+  if (!name || !email /*|| !password*/ || !age || !role || !recommend || !feature || !comments) {
     Swal.fire({
       title: "กรอกข้อมูลไม่ครบ",
       text: "กรุณากรอกทุกช่องก่อนกดบันทึก",
@@ -29,6 +30,7 @@ document.getElementById("userForm").onsubmit = async (e) => {
   const userData = {
     name,
     email,
+    // password,
     age: parseInt(age),
     role,
     recommend,

@@ -26,7 +26,7 @@ async function loadUsers() {
           <td class="text-center">${index + 1}</td>
           <td class="text-left">${user.name}</td>
           <td class="text-left">${user.email}</td>
-          <td class="text-center"><button class="btn btn-warning btn-sm text-center" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}')">Edit</button>
+          <td class="text-center"><button class="btn btn-warning btn-sm text-center" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}')">Edit</button>
 </td>
         </tr>
       `;
@@ -42,13 +42,14 @@ document.getElementById("userForm").addEventListener("submit", async function (e
     const userId = document.getElementById("userId").value;
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
     const age = parseInt(document.getElementById("age").value);  
     const role = document.getElementById("role").value;
     const recommend = document.getElementById("recommend").value;
     const feature = document.getElementById("feature").value;
     const comments = document.getElementById("comments").value;
   
-    const userData = { name, email, age, role, recommend, feature, comments };
+    const userData = { name, email, password, age, role, recommend, feature, comments };
   
     try {
       if (userId) {
@@ -68,10 +69,11 @@ document.getElementById("userForm").addEventListener("submit", async function (e
       Swal.fire("Error", "There was a problem.", "error");
     }
   });
-  function editUser(id, name, email, age, role, recommend, feature, comments) {
+  function editUser(id, name, email, password, age, role, recommend, feature, comments) {
     document.getElementById("userId").value = id;
     document.getElementById("name").value = name;
     document.getElementById("email").value = email;
+    document.getElementById("password").value = password;
     document.getElementById("age").value = age;
     document.getElementById("role").value = role;
     document.getElementById("recommend").value = recommend;
