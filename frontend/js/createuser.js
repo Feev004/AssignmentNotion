@@ -59,6 +59,7 @@ document.getElementById("userForm").onsubmit = async (e) => {
     if (id) {
       await axios.put(`${apiUrl}/${id}`, userData);
       Swal.fire({ title: "Update Successful!", icon: "success" });
+      window.location.href = "index.html";
     } else {
       await axios.post(apiUrl, userData);
       Swal.fire({ title: "User Created Successfully!", icon: "success" });

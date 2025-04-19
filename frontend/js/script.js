@@ -1,5 +1,23 @@
 const apiUrl = "https://desired-monthly-griffon.ngrok-free.app/api/users";
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// ตรวจสอบว่า login ผ่านหรือยัง
+const emailCookie = getCookie("cookie_email");
+const expiry = new Date(getCookie("cookie_date_end"));
+const now = new Date();
+
+if (!emailCookie || now > expiry) {
+  // ยังไม่ login หรือหมดอายุ
+  Swal.fire("Session expired", "Please login again", "warning").then(() => {
+    window.location.href = "index.html";
+  });
+}
+
 // Load and display users
 async function loadUsers() {
   try {
@@ -26,11 +44,13 @@ async function loadUsers() {
           <td class="text-center">${index + 1}</td>
           <td>${user.name}</td>
           <td>${user.email}</td>
+          <td>${user.password}</td>
           <td class="text-center">${user.age}</td>
           <td>${user.role}</td>
           <td>${user.recommend}</td>
           <td>${user.feature}</td>
           <td>${user.comments}</td>
+          <td class="text-center">${user.permmission}</td>
           <td class="text-center">
             <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.id}')">Delete</button>
           </td>

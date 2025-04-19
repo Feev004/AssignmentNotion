@@ -1,5 +1,23 @@
 const apiUrl = "https://desired-monthly-griffon.ngrok-free.app/api/users";
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
+// ตรวจสอบว่า login ผ่านหรือยัง
+const emailCookie = getCookie("cookie_email");
+const expiry = new Date(getCookie("cookie_date_end"));
+const now = new Date();
+
+if (!emailCookie || now > expiry) {
+  // ยังไม่ login หรือหมดอายุ
+  Swal.fire("Session expired", "Please login again", "warning").then(() => {
+    window.location.href = "index.html";
+  });
+}
+
 // Load and display users
 async function loadUsers() {
   try {

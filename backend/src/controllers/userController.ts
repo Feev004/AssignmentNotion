@@ -93,6 +93,7 @@ export const updateUser = async (req: Request, res: Response) => {
             Recommend: { rich_text: [{ text: { content: recommend } }] },
             Feature: { rich_text: [{ text: { content: feature } }] },
             Comments: { rich_text: [{ text: { content: comments } }] }, // เพิ่ม Comments
+            Permmission: { rich_text: [{ text: { content: permmission } }] }, // เพิ่ม Position เป็น "user"
         }
     });
     res.json({ message: 'User updated' }); 
@@ -120,4 +121,22 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     await notion.patch(`/pages/${id}`, { archived: true });
     res.json({ message: 'User deleted' });
+};
+
+export const updateByUser = async (req: Request, res: Response) => {
+    const { id } = req.params; // แยก ID จากพารามิเตอร์คำขอ
+    const { name, email, password, age, role, recommend, feature, comments } = req.body;
+    await notion.patch(`/pages/${id}`, {
+        properties: {
+            Name: { title: [{ text: { content: name } }] },
+            Email: { email: email },
+            Password: { rich_text: [{ text: { content: password } }] },
+            Age: { number: age },
+            Role: { rich_text: [{ text: { content: role } }] },
+            Recommend: { rich_text: [{ text: { content: recommend } }] },
+            Feature: { rich_text: [{ text: { content: feature } }] },
+            Comments: { rich_text: [{ text: { content: comments } }] }, // เพิ่ม Comments
+        }
+    });
+    res.json({ message: 'User updated' }); 
 };
