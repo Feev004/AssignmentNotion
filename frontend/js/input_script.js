@@ -7,11 +7,11 @@ function getCookie(name) {
 }
 
 // ตรวจสอบว่า login ผ่านหรือยัง
-const emailCookie = getCookie("cookie_email");
+const useridCookie = getCookie("cookie_userid");
 const expiry = new Date(getCookie("cookie_date_end"));
 const now = new Date();
 
-if (!emailCookie || now > expiry) {
+if (!useridCookie || now > expiry) {
   // ยังไม่ login หรือหมดอายุ
   Swal.fire("Session expired", "Please login again", "warning").then(() => {
     window.location.href = "index.html";

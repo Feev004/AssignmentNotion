@@ -7,11 +7,11 @@ function getCookie(name) {
 }
 
 // ตรวจสอบว่า login ผ่านหรือยัง
-const emailCookie = getCookie("cookie_email");
+const useridCookie = getCookie("cookie_userid");
 const expiry = new Date(getCookie("cookie_date_end"));
 const now = new Date();
 
-if (!emailCookie || now > expiry) {
+if (!useridCookie || now > expiry) {
   // ยังไม่ login หรือหมดอายุ
   Swal.fire("Session expired", "Please login again", "warning").then(() => {
     window.location.href = "index.html";
@@ -21,40 +21,38 @@ if (!emailCookie || now > expiry) {
 // Load and display users
 async function loadUsers() {
   try {
+    const currentUserId = getCookie("cookie_userid"); // ดึง user id ของคนที่ login
+
     const response = await axios.get(apiUrl, {
       headers: {
         "ngrok-skip-browser-warning": "true",
       },
     });
-    console.log("API response:", response.data); // <-- Check browser console here!
 
     const users = response.data;
-
-    // if (!Array.isArray(users)) {
-    //   console.error("Response is not an array:", users);
-    //   return;
-    // }
-
     const userTable = document.getElementById("userTable");
     userTable.innerHTML = "";
 
-    users.forEach((user, index) => {
-      if (user.permmission === "admin") {
-        return; // Skip admin users
-      }
-      userTable.innerHTML += `
-            <tr>
-          <td class="text-center">${index + 1}</td>
-          <td>${user.name}</td>
-          <td>${user.email}</td>
-          <td class="text-center">${user.age}</td>
-          <td>${user.role}</td>
-          <td>${user.recommend}</td>
-          <td>${user.feature}</td>
-          <td>${user.comments}</td>
-        </tr>
-      `;
-    });
+    const user = users.find(u => u.id === currentUserId); // หา user ที่ตรงกับ cookie
+    if (!user) {
+      Swal.fire("User not found", "กรุณา login ใหม่", "warning");
+      return;
+    }
+
+    // แสดงแค่คนเดียว
+    userTable.innerHTML += `
+      <tr>
+        <td class="text-center">1</td>
+        <td>${user.name}</td>
+        <td>${user.email}</td>
+        <td class="text-center">${user.age}</td>
+        <td>${user.role}</td>
+        <td>${user.recommend}</td>
+        <td>${user.feature}</td>
+        <td>${user.comments}</td>
+      </tr>
+    `;
+
   } catch (error) {
     console.error("Axios error:", error);
   }
@@ -94,9 +92,3 @@ async function deleteUser(id) {
 // Initial load
 loadUsers();
 
-{
-  /* <td>
-<a href="Edit.html?id=${user.id}" class="btn btn-sm btn-warning">Edit</a>
-<a href="Delete.html?id=${user.id}" class="btn btn-sm btn-info">View</a>
-</td> */
-}

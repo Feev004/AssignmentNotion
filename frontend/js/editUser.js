@@ -7,11 +7,11 @@ function getCookie(name) {
 }
 
 // ตรวจสอบว่า login ผ่านหรือยัง
-const emailCookie = getCookie("cookie_email");
+const useridCookie = getCookie("cookie_userid");
 const expiry = new Date(getCookie("cookie_date_end"));
 const now = new Date();
 
-if (!emailCookie || now > expiry) {
+if (!useridCookie || now > expiry) {
   // ยังไม่ login หรือหมดอายุ
   Swal.fire("Session expired", "Please login again", "warning").then(() => {
     window.location.href = "index.html";
@@ -21,36 +21,41 @@ if (!emailCookie || now > expiry) {
 // Load and display users
 async function loadUsers() {
   try {
+    const currentUserId = getCookie("cookie_userid");
+
     const response = await axios.get(apiUrl, {
       headers: {
         "ngrok-skip-browser-warning": "true",
       },
     });
-    console.log("API response:", response.data); // <-- Check browser console here!
 
     const users = response.data;
-
     const userTable = document.getElementById("userTable");
     userTable.innerHTML = "";
 
-    users.forEach((user, index) => {
-        if (user.permmission === "admin") {
-          return; // Skip admin users
-        }
-      userTable.innerHTML += `
+    const user = users.find(u => u.id === currentUserId);
+
+    if (user && user.permmission === "user") {
+      userTable.innerHTML = `
         <tr>
-          <td class="text-center">${index + 1}</td>
+          <td class="text-center">1</td>
           <td class="text-left">${user.name}</td>
           <td class="text-left">${user.email}</td>
           <td class="text-center"><button class="btn btn-warning btn-sm text-center" onclick="editUser('${user.id}', '${user.name}', '${user.email}', '${user.password}', '${user.age}', '${user.role}', '${user.recommend}', '${user.feature}', '${user.comments}', '${user.permmission}')">Edit</button></td>
         </tr>
       `;
-    });
+    } else {
+      Swal.fire("Access Denied", "Only users with permission 'user' can view this page.", "error").then(() => {
+        window.location.href = "index.html";
+      });
+    }
+
   } catch (error) {
     console.error("Axios error:", error);
-    Swal.fire("Access Denied", "Only users with permission 'user' can be edited.", "error");
+    Swal.fire("Error", "Failed to load user data", "error");
   }
 }
+
 
 // Handle form submission (Create/Update)
 document.getElementById("userForm").onsubmit = async (e) => {
