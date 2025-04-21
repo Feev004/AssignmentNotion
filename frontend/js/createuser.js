@@ -1,22 +1,22 @@
 const apiUrl = "https://desired-monthly-griffon.ngrok-free.app/api/users";
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-}
+// function getCookie(name) {
+//   const value = `; ${document.cookie}`;
+//   const parts = value.split(`; ${name}=`);
+//   if (parts.length === 2) return parts.pop().split(';').shift();
+// }
 
-// ตรวจสอบว่า login ผ่านหรือยัง
-const useridCookie = getCookie("cookie_userid");
-const expiry = new Date(getCookie("cookie_date_end"));
-const now = new Date();
+// // ตรวจสอบว่า login ผ่านหรือยัง
+// const useridCookie = getCookie("cookie_userid");
+// const expiry = new Date(getCookie("cookie_date_end"));
+// const now = new Date();
 
-if (!useridCookie || now > expiry) {
-  // ยังไม่ login หรือหมดอายุ
-  Swal.fire("Session expired", "Please login again", "warning").then(() => {
-    window.location.href = "index.html";
-  });
-}
+// if (!useridCookie || now > expiry) {
+//   // ยังไม่ login หรือหมดอายุ
+//   Swal.fire("Session expired", "Please login again", "warning").then(() => {
+//     window.location.href = "index.html";
+//   });
+// }
 
 // Handle form submission (Create/Update)
 document.getElementById("userForm").onsubmit = async (e) => {
