@@ -86,7 +86,7 @@ export const createUser = async (req: Request, res: Response) => {
             Recommend: { rich_text: [{ text: { content: recommend } }] },
             Feature: { rich_text: [{ text: { content: feature } }] },
             Comments: { rich_text: [{ text: { content: comments } }] },
-            Permmission: { rich_text: [{ text: { content: "user" } }] }, // เพิ่ม Position เป็น "user"
+            Permmission: { rich_text: [{ text: { content: "un_user" } }] }, // เพิ่ม Position เป็น "user"
           },
         });
         res.status(201).json({ message: "User created" });

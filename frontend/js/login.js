@@ -30,7 +30,7 @@ if (loginForm) {
         (user) => 
           user.email === inputUsername && 
           user.password === inputPassword && 
-          (user.permmission === "user" || user.permmission === "admin" )
+          (user.permmission === "user" || user.permmission === "admin" || user.permmission === "un_user")
       );
 
       console.log("Found user:", foundUser);
@@ -42,7 +42,9 @@ if (loginForm) {
       
         setLoginCookies(foundUser.id, foundUser.email, expireDate);
       
-        if (role === "user") {
+        if(role === "un_user"){
+          window.location.href = "unUserShowData.html";
+        } else if (role === "user") {
           window.location.href = "userShowData.html";
         } else if (role === "admin") {
           window.location.href = "showdata.html";
