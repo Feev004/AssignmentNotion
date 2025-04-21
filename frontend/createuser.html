@@ -16,10 +16,8 @@
   <body>
     <div class="container mt-5">
       <div class="card shadow-lg p-4">
-        <h2 class="mb-4 text-center">User Form</h2>
-        <form
-          id="userForm"
-          class="row g-3">
+        <h2 class="mb-4 text-center">Create user Form</h2>
+        <form id="userForm" class="row g-3">
           <fieldset>
             <label for="full-name">Name</label>
             <input type="hidden" id="userId" />
@@ -112,16 +110,31 @@
               />
             </div>
             <!-- ก่อนที่จะกด Save ควรมีการเช็คบอทก่อนว่าเป็นคนจริงไหม -->
-            <div class="text-end" >
-              <!-- <a href="showdata.html" class="btn btn-primary px-4 effect" type="submit">Save</a> -->
-              <button class="btn btn-primary px-4 effect" type="submit">Save</button>
+            <div class="form-check mt-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="humanCheck"
+                required
+              />
+              <label class="form-check-label" for="humanCheck">
+                ฉันไม่ใช่บอท
+              </label><br>
+              <label>ถ้า poisonous(Y) มีอยู่ 4, poisonous(N) มีอยู่ 3 คำถามคือ P(poisonous = Y) จะมีค่าเท่าใด(Naivebay[Laplace])</label><br>
+              <label>P(poisonous=Y)=(Y+1)/N+k = ?</label>
+                <input type="text" id="botCheck" class="" placeholder="0.xx or 0/0"/>
+            <div class="text-end">
+              <button class="btn btn-primary px-4 effect" type="submit">
+                Save
+              </button>
             </div>
           </fieldset>
         </form>
       </div>
     </div>
     <div class="text-center mt-3">
-        <a href="index.html" class="btn btn-dark effect">back to login</a></div>
+      <a href="index.html" class="btn btn-dark effect">back to login</a>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.17.2/dist/sweetalert2.all.min.js"></script>

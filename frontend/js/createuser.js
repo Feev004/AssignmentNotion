@@ -33,7 +33,15 @@ document.getElementById("userForm").onsubmit = async (e) => {
   const comments = document.getElementById("comments").value.trim();
 
   // เช็กว่ามีฟิลด์ไหนว่างบ้าง
-  if (!name || !email /*|| !password*/ || !age || !role || !recommend || !feature || !comments) {
+  if (
+    !name ||
+    !email /*|| !password*/ ||
+    !age ||
+    !role ||
+    !recommend ||
+    !feature ||
+    !comments
+  ) {
     Swal.fire({
       title: "กรอกข้อมูลไม่ครบ",
       text: "กรุณากรอกทุกช่องก่อนกดบันทึก",
@@ -55,14 +63,35 @@ document.getElementById("userForm").onsubmit = async (e) => {
     comments,
   };
 
+  const isHuman = document.getElementById("humanCheck").checked;
+
+  if (!isHuman) {
+    Swal.fire({
+      title: "กรุณายืนยันว่าไม่ใช่บอท",
+      text: "โปรดติ๊ก 'ฉันไม่ใช่บอท' ก่อนกดบันทึก",
+      icon: "warning",
+    });
+    return; // หยุดไม่ให้ส่ง
+  }
+
+  const botAnswer = document.getElementById("botCheck").value.trim().replace(/\s+/g, "");
+
+  if (botAnswer !== "0.56" && botAnswer !== "5/9") {
+    Swal.fire("คุณตอบคำถามไม่ถูกต้อง", "คิดดีๆ", "warning");
+    return;
+  }
+  
+
+
   try {
     if (id) {
       await axios.put(`${apiUrl}/${id}`, userData);
       Swal.fire({ title: "Update Successful!", icon: "success" });
-      window.location.href = "index.html";
+      // window.location.href = "index.html";
     } else {
       await axios.post(apiUrl, userData);
-      Swal.fire({ title: "User Created Successfully!", icon: "success" });
+      // Swal.fire({ title: "User Created Successfully!", icon: "success" });
+      window.location.href = "index.html";
     }
 
     document.getElementById("userForm").reset();
